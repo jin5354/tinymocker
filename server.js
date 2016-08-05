@@ -24,7 +24,7 @@ if(cluster.isMaster) {
     const logger = require('morgan');
     const bodyParser = require('body-parser');
 
-    app.use(express.static(__dirname + '/dist'));
+    app.use(express.static(__dirname + '/views/dist'));
     app.use(logger('dev'));
     app.use(bodyParser.json()); // for parsing application/json
     app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
