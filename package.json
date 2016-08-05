@@ -1,11 +1,19 @@
 {
   "name": "tinymocker",
-  "version": "1.0.0",
-  "description": "tinymocker",
+  "version": "1.0.2",
+  "description": "A convience tool to mock data in your local development.",
   "author": "jin5354 <xiaoyanjinx@gmail.com>",
-  "private": true,
   "scripts": {
     "start": "node server.js"
+  },
+  "bin": {
+    "tinymocker": "server.js",
+    "tm": "server.js",
+    "mock": "server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jin5354/tinymocker.git"
   },
   "dependencies": {
     "body-parser": "^1.15.2",
@@ -14,5 +22,15 @@
     "morgan": "^1.7.0",
     "request": "^2.74.0",
     "tinyproxy": "^0.1.8"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/jin5354/tinymocker/issues"
+  },
+  "homepage": "https://github.com/jin5354/tinymocker#readme",
+  "main": "server.js",
+  "devDependencies": {},
+  "keywords": [
+    "mock"
+  ],
+  "license": "MIT"
 }

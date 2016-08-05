@@ -1,9 +1,11 @@
+#!/usr/bin/env node
 'use strict';
 const cluster = require('cluster');
 const jsonfile = require('jsonfile');
-const mockDataFile = './mockData.json';
+const path = require('path');
+const mockDataFile = path.resolve(__dirname, 'mockData.json');
 
-let expressPort = 9998;
+let uiPort = 9998;
 let proxyPort = 9999;
 
 if(cluster.isMaster) {
@@ -166,7 +168,7 @@ if(cluster.isMaster) {
     });
 
     app.listen(expressPort, () => {
-        console.log('Express started and running on port 9998.');
+        console.log(`配置平台运行于 localhost: ${uiPort}.`);
     });
 
 }else {
@@ -221,5 +223,5 @@ if(cluster.isMaster) {
         mock: mock
     });
     proxy.start();
-    console.log('Proxy started! Listening on port 9999.');
+    console.log('MOCK服务器运行于 localhost:${proxyPort}。');
 }

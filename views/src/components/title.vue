@@ -4,7 +4,6 @@
       {{ title }}
       <span> {{ subtitle }} </span>
     </p>
-    <span>MOCK服务器：<em>10.8.96.35:9999</em></span>
   </header>
 </template>
 
