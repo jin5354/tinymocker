@@ -4,9 +4,15 @@ const cluster = require('cluster');
 const jsonfile = require('jsonfile');
 const path = require('path');
 const mockDataFile = path.resolve(__dirname, 'mockData.json');
+const program = require('commander');
 
-let uiPort = 9998;
-let proxyPort = 9999;
+program
+    .option('-u, --uiport <uiport>', 'set port of control panel')
+    .option('-p, --proxyport <proxyport>', 'set port of proxy server')
+    .parse(process.argv);
+
+let uiPort = program.uiport || 9998;
+let proxyPort = program.proxyport || 9999;
 
 if(cluster.isMaster) {
 
@@ -25,11 +31,12 @@ if(cluster.isMaster) {
     const app = express();
     const logger = require('morgan');
     const bodyParser = require('body-parser');
+    const open = require('open');
 
     app.use(express.static(__dirname + '/views/dist'));
     app.use(logger('dev'));
-    app.use(bodyParser.json()); // for parsing application/json
-    app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+    app.use(bodyParser.json()); 
+    app.use(bodyParser.urlencoded({ extended: true }));
 
     app.get('/', (req, res) => {
         res.sendFile(__dirname + '/pages/index.html');
@@ -167,9 +174,10 @@ if(cluster.isMaster) {
         }
     });
 
-    app.listen(expressPort, () => {
-        console.log(`配置平台运行于 localhost: ${uiPort}.`);
+    app.listen(uiPort, () => {
+        console.log(`配置平台运行于 localhost:${uiPort}。`);
     });
+    open('http://localhost:9998');
 
 }else {
 
@@ -179,10 +187,11 @@ if(cluster.isMaster) {
     let mockData = jsonfile.readFileSync(mockDataFile);
 
     let mock = (req, res, requestOptions) => {
+        let localhostReg = new RegExp(`(localhost|127\.0\.0\.1):${uiPort}`);
         let result = {};
-        let flag = mockData.some((e)=>{
-            let urlReg = new RegExp(e.urlReg, 'i');
-            if(e.enabled && urlReg.test(req.url)) {
+        let flag = mockData.some((e) => {
+            let urlReg = new RegExp(e.urlReg);
+            if(e.enabled && urlReg.test(req.url) && !localhostReg.test(req.url)) {
                 result.headers = e.headers;
                 result.statusCode = e.statusCode;
                 if(e.jsonp) {
@@ -199,7 +208,7 @@ if(cluster.isMaster) {
                     result.body = e.body;
                 }
             }
-            return e.enabled && urlReg.test(req.url);
+            return e.enabled && urlReg.test(req.url) && !localhostReg.test(req.url);
         });
         if(flag) {
             console.log(`MOCK ${req.method}: ${req.url}`);
@@ -223,5 +232,5 @@ if(cluster.isMaster) {
         mock: mock
     });
     proxy.start();
-    console.log('MOCK服务器运行于 localhost:${proxyPort}。');
+    console.log(`MOCK服务器运行于 localhost:${proxyPort}。`);
 }

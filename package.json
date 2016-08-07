@@ -1,6 +1,6 @@
 {
   "name": "tinymocker",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A convience tool to mock data in your local development.",
   "author": "jin5354 <xiaoyanjinx@gmail.com>",
   "scripts": {
@@ -17,9 +17,11 @@
   },
   "dependencies": {
     "body-parser": "^1.15.2",
+    "commander": "^2.9.0",
     "express": "^4.14.0",
     "jsonfile": "^2.3.1",
     "morgan": "^1.7.0",
+    "open": "0.0.5",
     "request": "^2.74.0",
     "tinyproxy": "^0.1.8"
   },
