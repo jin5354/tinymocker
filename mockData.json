@@ -8,6 +8,6 @@
         "headers": {
             "Content-Type": "text/html"
         },
-        "body": "{\n    \"status\": {\n        \"status_code\": 0,\n        \"status_reason\": \"\"\n    },\n    \"result\": {\n        \"data\": [{\n            \"eventType\": \"shop_diary\",\n            \"total\": 1,\n            \"list\": [{\n                \"diaryID\": 10398478,\n                \"title\": \"嗯对的\",\n                \"diaryImg\": [],\n                \"content\": \"MOC2345432145K\"\n            }],\n            \"shopID\": \"836984896\",\n            \"shopName\": \"奇怪的安达市大大的MOCKMOCK店\",\n            \"logo\": \"http://wd.geilicdn.com/vshop144843220591202726.jpeg\",\n            \"id\": \"82003073\",\n            \"pubTimeAbbr\": \"7月30日\",\n            \"pubTime\": \"1469677947\"\n        }],\n        \"page\": \"1\",\n        \"num\": \"10\"\n    }\n}"
+        "body": "{\n    \"result\": {\n        \"data\": \"testMockData\"\n    }\n}"
     }
 ]
