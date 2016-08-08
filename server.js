@@ -177,7 +177,7 @@ if(cluster.isMaster) {
     app.listen(uiPort, () => {
         console.log(`配置平台运行于 localhost:${uiPort}。`);
     });
-    open('http://localhost:9998');
+    open(`http://localhost:${uiPort}`);
 
 }else {
 
