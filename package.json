@@ -1,6 +1,6 @@
 {
   "name": "tinymocker",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A convience tool to mock data in your local development.",
   "author": "jin5354 <xiaoyanjinx@gmail.com>",
   "scripts": {
